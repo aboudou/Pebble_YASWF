@@ -1,7 +1,5 @@
 #include <pebble.h>
 
-#define KEY_TEMPERATURE 0
-
 static Window *s_main_window;
 static TextLayer *s_time_layer;
 static TextLayer *s_background_layer;
