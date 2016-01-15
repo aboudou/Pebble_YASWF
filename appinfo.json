@@ -1,7 +1,10 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "KEY_VIBRATE": 0
+    },
     "capabilities": [
-        "location"
+        "location",
+        "configurable"
     ],
     "companyName": "skuld@me.com",
     "longName": "Yet Another Simple Watch Face",
@@ -9,8 +12,8 @@
     "resources": {
         "media": [
             {
-                "file": "images/charge.png",
-                "name": "IMAGE_CHARGE",
+                "file": "images/screenshot-20150221094816.png",
+                "name": "MAIN_SCREENSHOT",
                 "type": "bitmap"
             },
             {
@@ -19,14 +22,14 @@
                 "type": "bitmap"
             },
             {
-                "file": "images/screenshot-20150221094816.png",
-                "name": "MAIN_SCREENSHOT",
-                "type": "bitmap"
-            },
-            {
                 "file": "images/menu.png",
                 "menuIcon": true,
                 "name": "IMAGE_MENU",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/charge.png",
+                "name": "IMAGE_CHARGE",
                 "type": "bitmap"
             }
         ]
@@ -39,7 +42,7 @@
         "chalk"
     ],
     "uuid": "2df733a3-70e0-4aec-b38b-cf22d9dff837",
-    "versionLabel": "1.1",
+    "versionLabel": "1.2",
     "watchapp": {
         "watchface": true
     }

@@ -1,5 +1,7 @@
 #include <pebble.h>
 
+#define KEY_VIBRATE 0
+
 static Window *s_main_window;
 static TextLayer *s_time_layer;
 static TextLayer *s_background_layer;
@@ -11,6 +13,8 @@ static GBitmap *s_bluetooth_bitmap;
 static TextLayer *s_date_layer;
 
 static BatteryChargeState s_last_charge_state;
+
+bool vibrateEnabled = true;
 
 // Vibe pattern: ON for 200ms, OFF for 100ms, ON for 400ms:
 static const uint32_t segments[] = { 500, 200, 500 };
@@ -70,7 +74,9 @@ static void update_battery(BatteryChargeState charge_state) {
 static void update_bluetooth(bool connected) {
   if (!connected) {
     if (!s_last_charge_state.is_plugged) {
-      vibes_enqueue_custom_pattern(pat);
+      if (vibrateEnabled) {
+        vibes_enqueue_custom_pattern(pat);
+      }
     }
     bitmap_layer_set_bitmap(s_bluetooth_layer, s_bluetooth_bitmap);
   } else {
@@ -159,14 +165,40 @@ static void main_window_unload(Window *window) {
   gbitmap_destroy(s_bluetooth_bitmap);
   bitmap_layer_destroy(s_bluetooth_layer);    
   text_layer_destroy(s_date_layer);
-}
+}  
 
+static void in_recv_handler(DictionaryIterator *iterator, void *context)
+{
+  //Get Tuple
+  Tuple *t = dict_read_first(iterator);
+  if(t)
+  {
+    switch(t->key)
+    {
+    case KEY_VIBRATE:
+      //It's the KEY_VIBRATE key
+      if(strcmp(t->value->cstring, "on") == 0) {
+        vibrateEnabled = true;
+ 
+        persist_write_bool(KEY_VIBRATE, true);
+      } else if(strcmp(t->value->cstring, "off") == 0) {
+        vibrateEnabled = false;
+ 
+        persist_write_bool(KEY_VIBRATE, false);
+      }
+      break;
+    }
+  }
+}
 
 /** App lifecycle **/
 
 static void init() {
   // Use system locale
   setlocale(LC_ALL, "");
+  
+  // Get saved vibrate settings
+  vibrateEnabled = persist_read_bool(KEY_VIBRATE);
   
   // Register with services
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
@@ -182,6 +214,10 @@ static void init() {
     .unload = main_window_unload
   });
 
+  // Set handlers for App Message
+  app_message_register_inbox_received((AppMessageInboxReceived) in_recv_handler);
+  app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
+  
   // Show the Window on the watch, with animated=true
   window_stack_push(s_main_window, true);
 }
