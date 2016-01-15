@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>YASWF</title>
+  </head>
+
+  <body>
+      <h1 style="font-family: sans-serif; text-align:center;">YASWF Settings</h1>
+      <p>
+        Vibration on Bluetooth disconnection
+        <select id="vibrate_enabled">
+          <option value="off">Off</option>
+          <option value="on">On</option>
+        </select>
+      </p>
+      <p style="text-align: center">
+        <button id="save_button">Save</button>
+      </p>
+  </body>
+
+  <script>
+    //Setup to allow easy adding more options later
+    function saveOptions() {
+      var vibrateSelect = document.getElementById("vibrate_enabled");
+
+      var options = {
+        "vibrate": vibrateSelect.options[vibrateSelect.selectedIndex].value
+      }
+
+      return options;
+    };
+
+    var submitButton = document.getElementById("save_button");
+    submitButton.addEventListener("click",
+      function() {
+        console.log("Submit");
+
+        var options = saveOptions();
+        var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+
+        document.location = location;
+      }, false);
+  </script>
+
+</html>
