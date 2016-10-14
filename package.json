@@ -1,0 +1,55 @@
+{
+    "author": "skuld@me.com",
+    "dependencies": {},
+    "keywords": [],
+    "name": "yaswf",
+    "pebble": {
+        "capabilities": [
+            "location",
+            "configurable"
+        ],
+        "displayName": "Yet Another Simple Watch Face",
+        "enableMultiJS": false,
+        "messageKeys": {
+            "KEY_VIBRATE": 0
+        },
+        "projectType": "native",
+        "resources": {
+            "media": [
+                {
+                    "file": "images/screenshot-20150221094816.png",
+                    "name": "MAIN_SCREENSHOT",
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/nobt.png",
+                    "name": "IMAGE_NO_BT",
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/menu.png",
+                    "menuIcon": true,
+                    "name": "IMAGE_MENU",
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/charge.png",
+                    "name": "IMAGE_CHARGE",
+                    "type": "bitmap"
+                }
+            ]
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "chalk",
+            "diorite"
+        ],
+        "uuid": "2df733a3-70e0-4aec-b38b-cf22d9dff837",
+        "watchapp": {
+            "watchface": true
+        }
+    },
+    "version": "1.2.0"
+}
