@@ -30,6 +30,7 @@
                     "file": "images/menu.png",
                     "menuIcon": true,
                     "name": "IMAGE_MENU",
+                    "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
@@ -44,7 +45,8 @@
             "aplite",
             "basalt",
             "chalk",
-            "diorite"
+            "diorite",
+            "emery"
         ],
         "uuid": "2df733a3-70e0-4aec-b38b-cf22d9dff837",
         "watchapp": {
