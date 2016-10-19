@@ -109,7 +109,7 @@ static void main_window_load(Window *window) {
   
   
   // Create time TextLayer
-  s_time_layer = text_layer_create(GRect(0, 50, bounds.size.w, 50));
+  s_time_layer = text_layer_create(GRect(0, (bounds.size.h / 2) - 35 , bounds.size.w, 50));
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_text(s_time_layer, "00:00");
@@ -118,20 +118,19 @@ static void main_window_load(Window *window) {
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
   
 
-  // Create charge BitmapLayer
-  s_charge_layer = bitmap_layer_create(GRect(PBL_IF_ROUND_ELSE(80, 85), PBL_IF_ROUND_ELSE(12, 2), 20, 20));
-  s_charge_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_CHARGE);
-  layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_charge_layer));
-
-  
   // Create battery TextLayer
-  s_battery_layer = text_layer_create(GRect(90, PBL_IF_ROUND_ELSE(20, 0), 54, 20));
+  s_battery_layer = text_layer_create(GRect(PBL_IF_ROUND_ELSE(90, bounds.size.w - 54), PBL_IF_ROUND_ELSE(20, 0), 54, 20));
   text_layer_set_background_color(s_battery_layer, GColorClear);
   text_layer_set_text_color(s_battery_layer, GColorWhite);
   text_layer_set_text(s_battery_layer, "");
   text_layer_set_font(s_battery_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
   text_layer_set_text_alignment(s_battery_layer, GTextAlignmentRight);
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_battery_layer));
+  
+  // Create charge BitmapLayer
+  s_charge_layer = bitmap_layer_create(GRect(PBL_IF_ROUND_ELSE(80, bounds.size.w - 64), PBL_IF_ROUND_ELSE(12, 2), 20, 20));
+  s_charge_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_CHARGE);
+  layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_charge_layer));
   
   
   // Create bluetooth BitmapLayer
@@ -141,7 +140,7 @@ static void main_window_load(Window *window) {
   
   
   // Create date Layer
-  s_date_layer = text_layer_create(GRect(0, 130, bounds.size.w, 30));
+  s_date_layer = text_layer_create(GRect(0, PBL_IF_ROUND_ELSE(bounds.size.h - 40, bounds.size.h - 35), bounds.size.w, 30));
   text_layer_set_background_color(s_date_layer, GColorClear);
   text_layer_set_text_color(s_date_layer, GColorWhite);
   text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
